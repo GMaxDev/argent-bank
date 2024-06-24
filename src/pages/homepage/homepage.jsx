@@ -1,9 +1,9 @@
+import HeroHeader from "../../components/hero-header/hero-header";
+
 export default function Homepage() {
   return (
-    <>
-    <h1 className="text-2xl">
-      Hello world!
-    </h1>
-    </>
+    <div className="flex">
+      <HeroHeader />
+    </div>
   );
 }

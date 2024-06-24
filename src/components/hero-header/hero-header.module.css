@@ -1,0 +1,6 @@
+.bgTree {
+    background-image: url("../../img/bank-tree.jpeg");
+    background-size: cover;
+    background-position: 0% 33%;
+    min-height: 300px;
+}
