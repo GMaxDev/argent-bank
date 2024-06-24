@@ -5,7 +5,8 @@ export default {
     extend: {
       colors: {
         "dark-text": "#2c3e50",
-        "border-footer": "#ccc"
+        "border-footer": "#ccc",
+        "border-icon": "#00bc77",
       },
     },
   },
