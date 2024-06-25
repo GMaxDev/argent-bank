@@ -8,7 +8,7 @@ export default function Header() {
         <img className="h-14" src={Logo} alt="Argent Bank Logo" />
       </Link>
 
-      <Link to="/" className="text-xl text-dark-text">
+      <Link to="/signin" className="text-xl text-dark-text">
         <i className="fa fa-user-circle"></i> Sign In
       </Link>
     </div>

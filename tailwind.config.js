@@ -5,8 +5,10 @@ export default {
     extend: {
       colors: {
         "dark-text": "#2c3e50",
+        "dark-bg": "#12002b",
         "border-footer": "#ccc",
         "border-icon": "#00bc77",
+
       },
     },
   },
