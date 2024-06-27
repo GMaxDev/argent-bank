@@ -7,7 +7,7 @@ import ImgcSecurity from "../../img/icon-security.png"
 
 export default function Homepage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col grow">
       <HeroHeader />
       <div className="flex justify-between">
         <ImpactInfo title="You are our #1 priority" content="Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes." img={ImgChat}/>

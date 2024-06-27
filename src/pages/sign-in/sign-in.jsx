@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function SignIn() {
   return (
-    <div className="flex justify-center bg-dark-bg">
+    <div className="flex justify-center bg-dark-bg grow">
       <div className="flex flex-col items-center p-8 mt-12 bg-white w-80 h-96">
         <i className="fa fa-user-circle text-dark-text"></i>
         <h1 className="my-5 text-2xl font-semibold text-dark-text">Sign In</h1>
