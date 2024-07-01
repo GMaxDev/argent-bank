@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function SignIn() {
+export default function Login() {
   return (
     <div className="flex justify-center bg-dark-bg grow">
       <div className="flex flex-col items-center p-8 mt-12 bg-white w-80 h-96">
@@ -19,7 +19,7 @@ export default function SignIn() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <Link to="/user" className="block w-full p-2 mt-4 font-semibold text-center text-white bg-border-icon">
+          <Link to="/profile" className="block w-full p-2 mt-4 font-semibold text-center text-white bg-border-icon">
             Sign In
           </Link>
         </form>
