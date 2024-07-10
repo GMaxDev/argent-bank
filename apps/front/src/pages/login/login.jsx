@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  const loginInfo = useSelector(login)
+  // const loginInfo = useSelector(login)
   return (
     <div className="flex justify-center bg-dark-bg grow">
       <div className="flex flex-col items-center p-8 mt-12 bg-white w-80 h-96">
