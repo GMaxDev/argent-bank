@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Transaction from "../../components/transaction/transaction";
 
 export default function Profile() {
-  const user = useSelector((state) => state.auth.user)
+  const user = useSelector((state) => state.user)
 
   if (!user) {
     return <div>Loading...</div>
@@ -13,7 +13,7 @@ export default function Profile() {
   return (
     <div className="flex flex-col items-center bg-dark-bg grow">
       <header className="flex flex-col items-center mb-8">
-        <h1 className="my-5 text-3xl font-bold text-center text-white ">
+        <h1 className="my-5 font-bold text-center text-white text-3xlgit a ">
           Welcome back <br />
           {user.firstName} {user.lastName}!
         </h1>
