@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { setEmail, setFirstName, setLastName, setPassword, setToken, toggleLogin } from "../../features/userReducer";
 import { postLogin, postProfile } from "../../utils/services/callApi";
 
