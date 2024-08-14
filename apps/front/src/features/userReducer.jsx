@@ -13,13 +13,20 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUserInfo: (state, action) => {
-            const {email, password, firstName, lastName, token } = action.payload
-            state.email = email || state.email
-            state.password = password || state.password
-            state.firstName = firstName || state.firstName
-            state.lastName = lastName || state.lastName
-            state.token = token || state.token
+        setEmail: (state, action) => {
+            state.email = action.payload
+        },
+        setPassword: (state, action) => {
+            state.setPassword = action.payload
+        },
+        setFirstName: (state, action) => {
+            state.firstName = action.payload
+        },
+        setLastName: (state, action) => {
+            state.lastName = action.payload
+        },
+        setToken: (state, action) => {
+            state.token = action.payload
         },
         toggleLogin: (state) => {
             state.isLogged = !state.isLogged
@@ -42,5 +49,5 @@ const userSlice = createSlice({
     }
 })
 
-export const { setUserInfo, toggleLogin, toggleLogout} = userSlice.actions
+export const { setEmail, setPassword, setFirstName, setLastName, setToken, toggleLogin, toggleLogout} = userSlice.actions
 export default userSlice.reducer
