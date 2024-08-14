@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setEmail, setPassword, setToken, toggleLogin } from "../../features/userReducer";
-import { postLogin } from "../../utils/services/callApi";
+import { setEmail, setFirstName, setLastName, setPassword, setToken, toggleLogin } from "../../features/userReducer";
+import { postLogin, postProfile } from "../../utils/services/callApi";
 
 export default function Login() {
   
@@ -31,10 +31,14 @@ export default function Login() {
       } else {
         const tokenGenerate = await response.body.token;
         const tokenResult = 'Bearer ' + tokenGenerate;
+        const profile = await postProfile(tokenResult);
         
         // Dispatch des actions pour mettre à jour les champs dans Redux
         dispatch(setEmail(emailInput))
         dispatch(setPassword(passwordInput))
+        dispatch(setFirstName(profile.body.firstName))
+        dispatch(setLastName(profile.body.lastName))
+        
         dispatch(setToken(tokenResult))
         dispatch(toggleLogin())
 
