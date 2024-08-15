@@ -112,12 +112,12 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/profile/transactions:
+  /transactions:
     get:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - Transaction Module
       summary: List User Transactions
       description: API for list all transactions of a user
       parameters:
@@ -137,12 +137,12 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/profile/transaction/{transactionId}:
+  /transaction/{transactionId}:
     get:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - Transaction Module
       summary: Get a specific transaction
       description: API to retrieve a specific transaction by its ID
       parameters:
@@ -173,7 +173,7 @@ paths:
       security:
         - Bearer: []
       tags:
-        - User Module
+        - Transaction Module
       summary: Update a transaction description
       description: API to update the description of a specific transaction by its ID
       parameters:
