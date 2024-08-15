@@ -31,7 +31,21 @@ export async function postSignUp(data) {
   return result;
 }
 
-// Requête POST pour récupérer les différentes infos du profil à l'aide du token généré à la connexion
+/**
+ *  Requête POST pour récupérer les différentes infos du profil à l'aide du token généré à la connexion
+ * @param {string} token 
+ * @returns {Promise<{
+    status: number;
+    "message": string;
+    "body": {
+      "email": string;
+      "firstName": string;
+      "lastName": string;
+      "createdAt": string;
+      "updatedAt": string;
+      "id": string;
+    }}>}
+ */
 export async function postProfile(token) {
   console.log(token);
   const response = await fetch("http://localhost:3001/api/v1/user/profile", {

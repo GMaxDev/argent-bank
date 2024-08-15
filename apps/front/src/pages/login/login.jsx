@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,20 +6,28 @@ import { postLogin, postProfile } from "../../utils/services/callApi";
 
 export default function Login() {
   
-  const [emailInput, setEmailInput] = useState("")
-  const [passwordInput, setPasswordInput] = useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {isLogged} = useSelector((state) => state.user)
 
+
+  /**
+   * @param {React.FormEvent<HTMLFormElement>} e - description
+   */ 
   const handler = async (e) => {
     e.preventDefault(); // On coupe le comportement par défaut afin de ne pas recharger la page
+    
+    const formData = new FormData(e.target)
+    const email = formData.get(`email`)
+    const password = formData.get(`password`)
 
     const data = { // On crée un objet dans lequel on stock le mail et le mot de passe entrées par l'utilisateur
-      email: emailInput,
-      password: passwordInput,
+      email,
+      password,
     };
 
+    console.log(data)
+    
     try {
       const response = await postLogin(data);
       console.log(response);
@@ -34,8 +41,7 @@ export default function Login() {
         const profile = await postProfile(tokenResult);
         
         // Dispatch des actions pour mettre à jour les champs dans Redux
-        dispatch(setEmail(emailInput))
-        dispatch(setPassword(passwordInput))
+        dispatch(setEmail(profile.body.email))
         dispatch(setFirstName(profile.body.firstName))
         dispatch(setLastName(profile.body.lastName))
         
@@ -65,8 +71,7 @@ export default function Login() {
               className="w-full p-1 text-xl border border-black"
               type="text"
               id="username"
-              value={emailInput}
-              onChange={(e) => setEmailInput(e.target.value)}
+              name="email"
             />
           </div>
           <div className="mb-4">
@@ -77,8 +82,7 @@ export default function Login() {
               className="w-full p-1 text-xl border border-black"
               type="password"
               id="password"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
+              name="password"
             />
           </div>
           <div className="flex gap-2">
