@@ -1,61 +1,62 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setEmail, setFirstName, setLastName, setPassword, setToken, toggleLogin } from "../../features/userReducer";
+import {
+  setEmail,
+  setFirstName,
+  setLastName,
+  setPassword,
+  setToken,
+  toggleLogin,
+} from "../../features/userReducer";
 import { postLogin, postProfile } from "../../utils/services/callApi";
 
 export default function Login() {
-  
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const {isLogged} = useSelector((state) => state.user)
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLogged } = useSelector((state) => state.user);
 
   /**
    * @param {React.FormEvent<HTMLFormElement>} e - description
-   */ 
+   */
   const handler = async (e) => {
     e.preventDefault(); // On coupe le comportement par défaut afin de ne pas recharger la page
-    
-    const formData = new FormData(e.target)
-    const email = formData.get(`email`)
-    const password = formData.get(`password`)
 
-    const data = { // On crée un objet dans lequel on stock le mail et le mot de passe entrées par l'utilisateur
+    const formData = new FormData(e.target);
+    const email = formData.get(`email`);
+    const password = formData.get(`password`);
+
+    const data = {
+      // On crée un objet dans lequel on stock le mail et le mot de passe entrées par l'utilisateur
       email,
       password,
     };
 
-    console.log(data)
-    
+    console.log(data);
+
     try {
       const response = await postLogin(data);
       console.log(response);
 
-      if (response.status === 400) {
-        console.log(response.message)
-        return;
-      } else {
-        const tokenGenerate = await response.body.token;
-        const tokenResult = 'Bearer ' + tokenGenerate;
-        const profile = await postProfile(tokenResult);
-        
-        // Dispatch des actions pour mettre à jour les champs dans Redux
-        dispatch(setEmail(profile.body.email))
-        dispatch(setFirstName(profile.body.firstName))
-        dispatch(setLastName(profile.body.lastName))
-        
-        dispatch(setToken(tokenResult))
-        dispatch(toggleLogin())
+      const tokenGenerate = await response.body.token;
+      const tokenResult = "Bearer " + tokenGenerate;
+      const profile = await postProfile(tokenResult);
+      console.log(profile.body)
 
-        navigate('/profile')
-      }
+      // Dispatch des actions pour mettre à jour les champs dans Redux
+      dispatch(setEmail(profile.body.email));
+      dispatch(setFirstName(profile.body.firstName));
+      dispatch(setLastName(profile.body.lastName));
+
+      dispatch(setToken(tokenResult));
+      dispatch(toggleLogin());
+
+      navigate("/profile");
     } catch (error) {
       console.error("An error occurred during login:", error);
       console.error("An unexpected error occurred. Please try again later.");
     }
   };
-
 
   return (
     <div className="flex justify-center bg-dark-bg grow">
@@ -89,7 +90,10 @@ export default function Login() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button type="submit" className="block w-full p-2 mt-4 font-semibold text-center text-white bg-border-icon">
+          <button
+            type="submit"
+            className="block w-full p-2 mt-4 font-semibold text-center text-white bg-border-icon"
+          >
             Sign in
           </button>
           {/* <Link
