@@ -1,20 +1,10 @@
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  setEmail,
-  setFirstName,
-  setLastName,
-  setPassword,
-  setToken,
-  toggleLogin,
-} from "../../features/userReducer";
-import { postLogin, postProfile } from "../../utils/services/callApi";
+import { signin } from "../../features/userReducer";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLogged } = useSelector((state) => state.user);
 
   /**
    * @param {React.FormEvent<HTMLFormElement>} e - description
@@ -26,36 +16,8 @@ export default function Login() {
     const email = formData.get(`email`);
     const password = formData.get(`password`);
 
-    const data = {
-      // On crée un objet dans lequel on stock le mail et le mot de passe entrées par l'utilisateur
-      email,
-      password,
-    };
-
-    console.log(data);
-
-    try {
-      const response = await postLogin(data);
-      console.log(response);
-
-      const tokenGenerate = await response.body.token;
-      const tokenResult = "Bearer " + tokenGenerate;
-      const profile = await postProfile(tokenResult);
-      console.log(profile.body)
-
-      // Dispatch des actions pour mettre à jour les champs dans Redux
-      dispatch(setEmail(profile.body.email));
-      dispatch(setFirstName(profile.body.firstName));
-      dispatch(setLastName(profile.body.lastName));
-
-      dispatch(setToken(tokenResult));
-      dispatch(toggleLogin());
-
-      navigate("/profile");
-    } catch (error) {
-      console.error("An error occurred during login:", error);
-      console.error("An unexpected error occurred. Please try again later.");
-    }
+    // Appel de la thunk pour gérer le login
+    dispatch(signin(email, password, navigate));
   };
 
   return (

@@ -1,6 +1,6 @@
 // Requête POST pour se connecter
 export async function postLogin(data) {
-  console.log(data);
+  // console.log(data);
 
   // Fonction fetch avec un objet qui définit le type de requête, le type de contenu et convertit l'objet data en une chaîne JSON pour l'envoyer dans le corps de la requête
   const response = await fetch("http://localhost:3001/api/v1/user/login", {
@@ -18,7 +18,7 @@ export async function postLogin(data) {
 
 // Requête POST créer un nouveau profil
 export async function postSignUp(data) {
-  console.log(data);
+  // console.log(data);
   const response = await fetch("http://localhost:3001/api/v1/user/signup", {
     method: "POST",
     headers: {
@@ -47,7 +47,7 @@ export async function postSignUp(data) {
     }}>}
  */
 export async function postProfile(token) {
-  console.log(token);
+  // console.log(token);
   const response = await fetch("http://localhost:3001/api/v1/user/profile", {
     method: "POST",
     headers: {

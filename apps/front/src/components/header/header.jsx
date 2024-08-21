@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "../../img/argentBankLogo.png";
 import { Link } from "react-router-dom";
-import { toggleLogout } from "../../features/userReducer";
+import { logout } from "../../features/userReducer";
 
 export default function Header() {
   const isLogged = useSelector((state) => state.user.isLogged)
   const dispatch = useDispatch()
 
   const handleLogout = () => {
-    dispatch(toggleLogout())
+    dispatch(logout())
   }
 
   return (
