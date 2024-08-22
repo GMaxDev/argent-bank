@@ -24,7 +24,7 @@ app.use("/api/v1/user", require("./routes/userRoutes"));
 
 // API Documentation
 if (process.env.NODE_ENV !== "production") {
-  const swaggerDocs = yaml.load("../swagger.yaml");
+  const swaggerDocs = yaml.load("./swagger.yaml");
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 }
 

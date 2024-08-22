@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signin } from "../../features/userReducer";
+import { login } from "../../features/userReducer";
+import { postLogin, postProfile } from "../../utils/services/callApi";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {isLogged} = useSelector((state) => state.user)
 
   /**
    * @param {React.FormEvent<HTMLFormElement>} e - description
@@ -16,9 +18,25 @@ export default function Login() {
     const email = formData.get(`email`);
     const password = formData.get(`password`);
 
-    // Appel de la thunk pour gérer le login
-    dispatch(signin(email, password, navigate));
+    const response = await postLogin({email, password});
+
+    const tokenGenerate = response.body.token;
+    const tokenResult = "Bearer " + tokenGenerate;
+
+    const profile = await postProfile(tokenResult);
+    dispatch(
+      login({
+        email: profile.body.email,
+        firstName: profile.body.firstName,
+        lastName: profile.body.lastName,
+        token: tokenResult,
+      })
+    );
   };
+
+  if(isLogged) {
+    navigate("/profile")
+  }
 
   return (
     <div className="flex justify-center bg-dark-bg grow">
