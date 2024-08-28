@@ -9,7 +9,7 @@ import Transaction from "../../components/transaction/transaction";
 
 export default function Profile() {
   const { firstName, lastName, token } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   const [isEditing, setIsEditing] = useState(false);
   const [newFirstName, setNewFirstName] = useState(firstName);
